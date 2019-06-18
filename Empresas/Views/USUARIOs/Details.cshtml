@@ -1,0 +1,26 @@
+﻿@model Empresas.Models.USUARIO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 style="color:#000000" ;>Details</h2>
+
+<div>
+    <h4 style="color:#000000" ;>USUARIO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CONTRASEÑA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONTRASEÑA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.NOMBRE }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

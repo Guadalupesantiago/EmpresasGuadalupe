@@ -1,0 +1,34 @@
+﻿@model Empresas.Models.EMPRESA
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 style="color:#000000" ;>Eliminar</h2>
+
+<h3>Esta seguro de eliminar?</h3>
+<div>
+    <h4 style="color:#000000" ;>EMPRESA</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt style="color:#000000" ;>
+            @Html.DisplayNameFor(model => model.TRABAJADOR.CURP)
+        </dt>
+
+        <dd style="color:#000000" ;>
+            @Html.DisplayFor(model => model.TRABAJADOR.CURP)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+</div>

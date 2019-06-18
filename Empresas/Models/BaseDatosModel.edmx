@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EMPRESAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_USUARIO" Type="varchar" MaxLength="30" />
+          <Property Name="ID_TRABAJADOR" Type="int" />
+        </EntityType>
+        <EntityType Name="TRABAJADOR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CURP" Type="nvarchar(max)" />
+          <Property Name="NSS" Type="varchar" MaxLength="50" />
+          <Property Name="SUELDO" Type="varchar" MaxLength="50" />
+          <Property Name="DEPARTAMENTO" Type="varchar" MaxLength="50" />
+          <Property Name="DOMICILIO" Type="varchar" MaxLength="50" />
+          <Property Name="OBSERVACION" Type="varchar" MaxLength="200" />
+          <Property Name="EDAD" Type="varchar" MaxLength="10" />
+          <Property Name="FECHA" Type="datetime" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="NOMBRE" />
+          </Key>
+          <Property Name="NOMBRE" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CONTRASEÑA" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__EMPRESA__ID_TRAB__09DE7BCC">
+          <End Role="TRABAJADOR" Type="Self.TRABAJADOR" Multiplicity="0..1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRABAJADOR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="ID_TRABAJADOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPRESA__NOMBRE___08EA5793">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="NOMBRE" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="NOMBRE_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EMPRESAModelStoreContainer">
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRABAJADOR" EntityType="Self.TRABAJADOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__EMPRESA__ID_TRAB__09DE7BCC" Association="Self.FK__EMPRESA__ID_TRAB__09DE7BCC">
+            <End Role="TRABAJADOR" EntitySet="TRABAJADOR" />
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPRESA__NOMBRE___08EA5793" Association="Self.FK__EMPRESA__NOMBRE___08EA5793">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EMPRESAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE_USUARIO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ID_TRABAJADOR" Type="Int32" />
+          <NavigationProperty Name="TRABAJADOR" Relationship="Self.FK__EMPRESA__ID_TRAB__09DE7BCC" FromRole="EMPRESA" ToRole="TRABAJADOR" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__EMPRESA__NOMBRE___08EA5793" FromRole="EMPRESA" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="TRABAJADOR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CURP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NSS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SUELDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DEPARTAMENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOMICILIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OBSERVACION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EDAD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.FK__EMPRESA__ID_TRAB__09DE7BCC" FromRole="TRABAJADOR" ToRole="EMPRESA" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="NOMBRE" />
+          </Key>
+          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONTRASEÑA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.FK__EMPRESA__NOMBRE___08EA5793" FromRole="USUARIO" ToRole="EMPRESA" />
+        </EntityType>
+        <Association Name="FK__EMPRESA__ID_TRAB__09DE7BCC">
+          <End Role="TRABAJADOR" Type="Self.TRABAJADOR" Multiplicity="0..1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TRABAJADOR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="ID_TRABAJADOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPRESA__NOMBRE___08EA5793">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="NOMBRE" />
+            </Principal>
+            <Dependent Role="EMPRESA">
+              <PropertyRef Name="NOMBRE_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EMPRESAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" />
+          <EntitySet Name="TRABAJADOR" EntityType="Self.TRABAJADOR" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <AssociationSet Name="FK__EMPRESA__ID_TRAB__09DE7BCC" Association="Self.FK__EMPRESA__ID_TRAB__09DE7BCC">
+            <End Role="TRABAJADOR" EntitySet="TRABAJADOR" />
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPRESA__NOMBRE___08EA5793" Association="Self.FK__EMPRESA__NOMBRE___08EA5793">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EMPRESAModelStoreContainer" CdmEntityContainer="EMPRESAEntities">
+          <EntitySetMapping Name="EMPRESA">
+            <EntityTypeMapping TypeName="EMPRESAModel.EMPRESA">
+              <MappingFragment StoreEntitySet="EMPRESA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
+                <ScalarProperty Name="ID_TRABAJADOR" ColumnName="ID_TRABAJADOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRABAJADOR">
+            <EntityTypeMapping TypeName="EMPRESAModel.TRABAJADOR">
+              <MappingFragment StoreEntitySet="TRABAJADOR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CURP" ColumnName="CURP" />
+                <ScalarProperty Name="NSS" ColumnName="NSS" />
+                <ScalarProperty Name="SUELDO" ColumnName="SUELDO" />
+                <ScalarProperty Name="DEPARTAMENTO" ColumnName="DEPARTAMENTO" />
+                <ScalarProperty Name="DOMICILIO" ColumnName="DOMICILIO" />
+                <ScalarProperty Name="OBSERVACION" ColumnName="OBSERVACION" />
+                <ScalarProperty Name="EDAD" ColumnName="EDAD" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="EMPRESAModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CONTRASEÑA" ColumnName="CONTRASEÑA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

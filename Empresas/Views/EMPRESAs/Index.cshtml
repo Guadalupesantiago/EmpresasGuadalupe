@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Empresas.Models.EMPRESA>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="color:#000000" ;>Inicio</h2>
+
+<p>
+    @Html.ActionLink("Crear Usuario", "Create")
+</p>
+<table class="table">
+    <tr style="color:#000000" ;>
+        <th>
+            @Html.DisplayNameFor(model => model.TRABAJADOR.CURP)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr style="color:#000000" ;>
+            <td>
+                @Html.DisplayFor(modelItem => item.TRABAJADOR.CURP)
+            </td>
+
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
